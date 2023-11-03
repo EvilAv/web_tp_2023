@@ -1,6 +1,10 @@
 main > .container {
   padding: 60px 15px 0;
 }
+
+main{
+	margin-bottom: 50px;
+  }
 .nav-item{
 	align-self: center;
 }
