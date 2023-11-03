@@ -1,0 +1,242 @@
+{% load static %}
+<!doctype html>
+<html lang="en" class="h-100">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.88.1">
+    <title>Main</title>
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/index_style.css' %}">
+
+    
+
+    <!-- Bootstrap core CSS -->
+      <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+
+  </head>
+  <body class="d-flex flex-column h-100">
+    
+<header>
+  <!-- Fixed navbar -->
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="index.html">Ask_Vukolov</a>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          <li class="nav-item search_bar">
+            <form class="d-flex">
+              <input class="form-control me-2 search_input" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">Ask!</button>
+            </form>
+          </li>
+          <li class="nav-item avatar">
+            <img  src="img/avatar.jpg" alt="UwU">
+          </li>
+          <li class="nav-item login_work">
+            <div class="name"><h4>Hamprry</h4></div>
+            <div class="account_work">
+              <a href="#" class="settings">settings</a>
+              <a href="#" class="logout">log out</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- Begin page content -->
+<main class="flex-shrink-0">
+  <div class="container">
+    <div class="row">
+      <div class="col-8">
+        <h1 class="mt-5">Questions</h1>
+        <div class="question_list">
+          <div class="question row">
+            <div class="col-4 question_avatar">
+              <img src="img/avatar.jpg" alt="UwU">
+            </div>
+            <div class="question_content col-8">
+              <h2 class="question_title"><a href="question.html">Lorem ipsum dolor sit amet.</a></h2>
+              <div class="question_text">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti incidunt fuga dicta eaque, quae impedit!</p>
+              </div>
+            </div>
+            <div class="control_panel row">
+              <div class="likes col-4">
+                <button type="button" class="btn btn-success">Like</button>
+                <span class="like_counter">-9</span>
+                <button type="button" class="btn btn-danger">Dislike</button>
+              </div>
+              <div class="col-4 answers">
+                <a href="question.html">answer (3)</a>
+              </div>
+              <div class="col-4 question_tags">
+                Tags:
+                <a href="tag.html">Python</a>
+                <a href="tag.html">SQL</a>
+              </div>
+            </div>
+          </div>
+          <div class="question row">
+            <div class="col-4 question_avatar">
+              <img src="img/avatar.jpg" alt="UwU">
+            </div>
+            <div class="question_content col-8">
+              <h2 class="question_title"><a href="question.html">Lorem ipsum dolor sit amet.</a></h2>
+              <div class="question_text">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti incidunt fuga dicta eaque, quae impedit!</p>
+              </div>
+            </div>
+            <div class="control_panel row">
+              <div class="likes col-4">
+                <button type="button" class="btn btn-success">Like</button>
+                <span class="like_counter">-9</span>
+                <button type="button" class="btn btn-danger">Dislike</button>
+              </div>
+              <div class="col-4 answers">
+                <a href="question.html">answer (3)</a>
+              </div>
+              <div class="col-4 question_tags">
+                Tags:
+                <a href="tag.html">Python</a>
+                <a href="tag.html">SQL</a>
+              </div>
+            </div>
+          </div>
+          <div class="question row">
+            <div class="col-4 question_avatar">
+              <img src="img/avatar.jpg" alt="UwU">
+            </div>
+            <div class="question_content col-8">
+              <h2 class="question_title"><a href="question.html">Lorem ipsum dolor sit amet.</a></h2>
+              <div class="question_text">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti incidunt fuga dicta eaque, quae impedit!</p>
+              </div>
+            </div>
+            <div class="control_panel row">
+              <div class="likes col-4">
+                <button type="button" class="btn btn-success">Like</button>
+                <span class="like_counter">-9</span>
+                <button type="button" class="btn btn-danger">Dislike</button>
+              </div>
+              <div class="col-4 answers">
+                <a href="question.html">answer (3)</a>
+              </div>
+              <div class="col-4 question_tags">
+                Tags:
+                <a href="tag.html">Python</a>
+                <a href="tag.html">SQL</a>
+              </div>
+            </div>
+          </div>
+          <div class="question row">
+            <div class="col-4 question_avatar">
+              <img src="img/avatar.jpg" alt="UwU">
+            </div>
+            <div class="question_content col-8">
+              <h2 class="question_title"><a href="question.html">Lorem ipsum dolor sit amet.</a></h2>
+              <div class="question_text">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti incidunt fuga dicta eaque, quae impedit!</p>
+              </div>
+            </div>
+            <div class="control_panel row">
+              <div class="likes col-4">
+                <button type="button" class="btn btn-success">Like</button>
+                <span class="like_counter">-9</span>
+                <button type="button" class="btn btn-danger">Dislike</button>
+              </div>
+              <div class="col-4 answers">
+                <a href="question.html">answer (3)</a>
+              </div>
+              <div class="col-4 question_tags">
+                Tags:
+                <a href="tag.html">Python</a>
+                <a href="tag.html">SQL</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+        <div class="col-4 slider">
+        <h2 class="mt-5">Popular Tags</h2>
+        <ul class="tags_top">
+          <li class="tags_group">
+            <ul>
+              <li class="tag"><a href="">Lorem.</a></li>
+              <li class="tag"><a href="">Asperiores!</a></li>
+              <li class="tag"><a href="">Sequi.</a></li>
+              <li class="tag"><a href="">Illo!</a></li>
+            </ul>
+          </li>
+          <li class="tags_group">
+            <ul>
+              <li class="tag"><a href="">Lorem.</a></li>
+              <li class="tag"><a href="">Optio.</a></li>
+              <li class="tag"><a href="">Inventore.</a></li>
+              <li class="tag"><a href="">Quasi.</a></li>
+            </ul>
+          </li>
+          <li class="tags_group">
+            <ul>
+              <li class="tag"><a href="">Lorem.</a></li>
+              <li class="tag"><a href="">Quisquam.</a></li>
+              <li class="tag"><a href="">Ut?</a></li>
+              <li class="tag"><a href="">Nesciunt?</a></li>
+            </ul>
+          </li>
+        </ul>
+        <h2 class="mt-5">Best Members</h2>
+        <ul class="members">
+          <li><a href="#">Lorem.</a></li>
+          <li><a href="#">Quas!</a></li>
+          <li><a href="#">Neque!</a></li>
+          <li><a href="#">Est.</a></li>
+          <li><a href="#">Ab.</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+  <nav aria-label="Page navigation example">
+    <ul class="pagination">
+      <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+      <li class="page-item active"><a class="page-link" href="#">1</a></li>
+      <li class="page-item"><a class="page-link" href="#">2</a></li>
+      <li class="page-item"><a class="page-link" href="#">3</a></li>
+      <li class="page-item"><a class="page-link" href="#">Next</a></li>
+    </ul>
+  </nav>
+</div>
+</main>
+<footer class="footer mt-auto py-3 bg-secondary">
+  <div class="container">
+    <span class="text-light">Ask_Vukolov</span>
+  </div>
+</footer>
+
+
+    <script src="/docs/5.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+      
+  </body>
+</html>

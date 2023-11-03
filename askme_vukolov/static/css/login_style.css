@@ -1,0 +1,16 @@
+.login_element{
+	margin: 50px;
+	font-size: 20px;
+}
+.error_msg{
+	color: red;
+	font-weight: bold;
+	font-style: italic;
+}
+.first_time a{
+	font-size: 17px;
+	font-style: italic;
+}
+.first_time{
+	margin-top: 10px;
+}
