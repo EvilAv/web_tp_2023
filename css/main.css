@@ -1,0 +1,56 @@
+main > .container {
+  padding: 60px 15px 0;
+}
+.nav-item{
+	align-self: center;
+}
+.navbar-nav{
+	width: 100%;
+}
+.search_bar{
+	width: 70%;
+}
+.avatar{
+	width: 30%;
+}
+.avatar img{
+	width: 70px;
+	float: right;
+}
+.login_work{
+	color: white;
+	width: 10%;
+	margin-left: 2%;
+}
+.tags_top{
+	list-style: none;
+}
+.tags_group{
+	margin-bottom: 15px;
+	list-style: none;
+	font-size: 20px;
+}
+.tag{
+	display: inline;
+	margin-left: 5px;
+}
+.tag a{
+	text-decoration: none;
+	color: black;
+}
+.tag a:hover{
+	font-weight: bold;
+}
+.tags_group:first-child a{
+	color: red;
+}
+.members{
+	list-style: none;
+}
+.members > li > a{
+	font-size: 20px;
+	margin-top: 10px;
+}
+.slider{
+	padding: 20px;
+}
