@@ -1,0 +1,25 @@
+.question{
+    border-bottom: dotted;
+    padding: 20px;
+    margin-right: 30px;
+}
+.question_list{
+	margin: 5px 10px;
+	padding: 10px;
+}
+.question_avatar img {
+	width: 150px;
+}
+.question_content{
+	padding: 5px 10px;
+}
+.likes{
+	margin: 10px 0px;
+}
+.like_counter{
+	font-weight: bold;
+}
+.question_tags a{
+	color: green;
+	font-weight: bold;
+}

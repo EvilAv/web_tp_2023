@@ -1,0 +1,19 @@
+{% extends 'layouts/base.html' %}
+
+{% load static %}
+
+{% block content %}
+  <link rel="stylesheet" href="{% static 'css/index_style.css' %}">
+  <h1 class="mt-5">Tag: {{ tag_name }}</h1>
+  <div class="question_list">
+    {% for question in questions %}
+      {% include 'components/question-item.html' %}
+    {% endfor %}
+
+  </div>
+
+{% include 'components/paginator.html' %}
+{% endblock %}
+
+
+<!doctype html>

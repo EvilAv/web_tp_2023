@@ -1,0 +1,38 @@
+  <div class="container">
+  <nav aria-label="Page navigation example">
+<!--    <div class="text-danger lead">Error!</div>-->
+    <ul class="pagination">
+      {% if page.page_obj.has_previous %}
+            <li class="page-item">
+                <a class="page-link"
+                   href="{{ request.path }}?page={{ page.page_obj.previous_page_number }}">Previous</a>
+            </li>
+      {% else %}
+            <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+      {% endif %}
+
+      {% for page_idx in page.page_range %}
+      {% if page_idx == page.page_obj.number %}
+            <li class="page-item active">
+                <a class="page-link"
+                   href="{{ request.path }}?page={{ page.page_obj.number }}">{{ page_idx }}</a>
+            </li>
+      {% else %}
+            <li class="page-item">
+                <a class="page-link"
+                   href="{{ request.path }}?page={{ page_idx }}">{{ page_idx }}</a>
+            </li>
+      {% endif %}
+      {% endfor %}
+
+      {% if page.page_obj.has_next %}
+            <li class="page-item">
+                <a class="page-link"
+                   href="{{ request.path }}?page={{ page.page_obj.next_page_number }}">Next</a>
+            </li>
+      {% else %}
+            <li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
+      {% endif %}
+    </ul>
+  </nav>
+</div>
