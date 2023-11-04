@@ -39,16 +39,7 @@
               <button class="btn btn-outline-success" type="submit">Ask!</button>
             </form>
           </li>
-          <li class="nav-item avatar">
-            <img  src="{% static 'img/avatar.jpg' %}" alt="UwU">
-          </li>
-          <li class="nav-item login_work">
-            <div class="name"><h4>Hamprry</h4></div>
-            <div class="account_work">
-              <a href="#" class="settings">settings</a>
-              <a href="#" class="logout">log out</a>
-            </div>
-          </li>
+          {% include 'components/user-preview.html' %}
         </ul>
       </div>
     </div>
@@ -65,32 +56,7 @@
       </div>
         <div class="col-4 slider">
         <h2 class="mt-5">Popular Tags</h2>
-        <ul class="tags_top">
-          <li class="tags_group">
-            <ul>
-              <li class="tag"><a href="{% url 'tag' 'Some temp name' %}">Lorem.</a></li>
-              <li class="tag"><a href="{% url 'tag' 'Some temp name' %}">Asperiores!</a></li>
-              <li class="tag"><a href="{% url 'tag' 'Some temp name' %}}">Sequi.</a></li>
-              <li class="tag"><a href="{% url 'tag' 'Some temp name' %}">Illo!</a></li>
-            </ul>
-          </li>
-          <li class="tags_group">
-            <ul>
-              <li class="tag"><a href="{% url 'tag' 'Some temp name' %}">Lorem.</a></li>
-              <li class="tag"><a href="{% url 'tag' 'Some temp name' %}">Optio.</a></li>
-              <li class="tag"><a href="{% url 'tag' 'Some temp name' %}">Inventore.</a></li>
-              <li class="tag"><a href="{% url 'tag' 'Some temp name' %}">Quasi.</a></li>
-            </ul>
-          </li>
-          <li class="tags_group">
-            <ul>
-              <li class="tag"><a href="{% url 'tag' 'Some temp name' %}">Lorem.</a></li>
-              <li class="tag"><a href="{% url 'tag' 'Some temp name' %}">Quisquam.</a></li>
-              <li class="tag"><a href="{% url 'tag' 'Some temp name' %}">Ut?</a></li>
-              <li class="tag"><a href="{% url 'tag' 'Some temp name' %}">Nesciunt?</a></li>
-            </ul>
-          </li>
-        </ul>
+          {% include 'components/tag-cloud.html' %}
         <h2 class="mt-5">Best Members</h2>
         <ul class="members">
           <li><a href="#">Lorem.</a></li>

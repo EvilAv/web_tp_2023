@@ -1,0 +1,11 @@
+        <ul class="tags_top">
+            {% for tags_row in tags %}
+            <li class="tags_group">
+                <ul>
+                    {% for tag in tags_row %}
+                        <li class="tag"><a href="{% url 'tag' tag.name %}">{{ tag.name }}</a></li>
+                    {% endfor %}
+                </ul>
+            </li>
+            {% endfor %}
+        </ul>
