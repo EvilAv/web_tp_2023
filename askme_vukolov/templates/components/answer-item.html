@@ -1,0 +1,28 @@
+{% load static %}
+
+<div class="answer row">
+    <div class="col-4 answer_avatar">
+      <img src="{% static 'img/avatar.jpg' %}" alt="UwU">
+    </div>
+    <div class="answer_content col-8">
+      <h2 class="answer_title">{{ answer.title }}</h2>
+      <div class="answer_text">
+        <p>{{ answer.text }}</p>
+      </div>
+    </div>
+    <div class="control_panel row">
+      <div class="likes col-4">
+        <button type="button" class="btn btn-success">Like</button>
+        <span class="like_counter">{{ answer.rate }}</span>
+        <button type="button" class="btn btn-danger">Dislike</button>
+      </div>
+      <div class="col-4 is_correct">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+          <label class="form-check-label" for="flexCheckDefault">
+            Is correct?
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>

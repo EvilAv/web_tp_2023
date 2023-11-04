@@ -30,7 +30,7 @@
   <!-- Fixed navbar -->
   <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <div class="container-fluid">
-      <a class="navbar-brand" href="index.html">Ask_Vukolov</a>
+      <a class="navbar-brand" href="{% url 'index' %}">Ask_Vukolov</a>
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav me-auto mb-2 mb-md-0">
           <li class="nav-item search_bar">
@@ -68,26 +68,26 @@
         <ul class="tags_top">
           <li class="tags_group">
             <ul>
-              <li class="tag"><a href="">Lorem.</a></li>
-              <li class="tag"><a href="">Asperiores!</a></li>
-              <li class="tag"><a href="">Sequi.</a></li>
-              <li class="tag"><a href="">Illo!</a></li>
+              <li class="tag"><a href="{% url 'tag' 'Some temp name' %}">Lorem.</a></li>
+              <li class="tag"><a href="{% url 'tag' 'Some temp name' %}">Asperiores!</a></li>
+              <li class="tag"><a href="{% url 'tag' 'Some temp name' %}}">Sequi.</a></li>
+              <li class="tag"><a href="{% url 'tag' 'Some temp name' %}">Illo!</a></li>
             </ul>
           </li>
           <li class="tags_group">
             <ul>
-              <li class="tag"><a href="">Lorem.</a></li>
-              <li class="tag"><a href="">Optio.</a></li>
-              <li class="tag"><a href="">Inventore.</a></li>
-              <li class="tag"><a href="">Quasi.</a></li>
+              <li class="tag"><a href="{% url 'tag' 'Some temp name' %}">Lorem.</a></li>
+              <li class="tag"><a href="{% url 'tag' 'Some temp name' %}">Optio.</a></li>
+              <li class="tag"><a href="{% url 'tag' 'Some temp name' %}">Inventore.</a></li>
+              <li class="tag"><a href="{% url 'tag' 'Some temp name' %}">Quasi.</a></li>
             </ul>
           </li>
           <li class="tags_group">
             <ul>
-              <li class="tag"><a href="">Lorem.</a></li>
-              <li class="tag"><a href="">Quisquam.</a></li>
-              <li class="tag"><a href="">Ut?</a></li>
-              <li class="tag"><a href="">Nesciunt?</a></li>
+              <li class="tag"><a href="{% url 'tag' 'Some temp name' %}">Lorem.</a></li>
+              <li class="tag"><a href="{% url 'tag' 'Some temp name' %}">Quisquam.</a></li>
+              <li class="tag"><a href="{% url 'tag' 'Some temp name' %}">Ut?</a></li>
+              <li class="tag"><a href="{% url 'tag' 'Some temp name' %}">Nesciunt?</a></li>
             </ul>
           </li>
         </ul>
