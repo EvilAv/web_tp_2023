@@ -16,7 +16,8 @@ class Question(models.Model):
     author = models.ForeignKey(Profile, on_delete=models.CASCADE)
     title = models.CharField(max_length=256)
     text = models.TextField(max_length=2048)
-    date_time = models.DateTimeField(auto_now_add=True)
+    # date_time = models.DateTimeField(auto_now_add=True)
+    date_time = models.DateTimeField()
     cur_rate = models.IntegerField(default=0)
     ans_count = models.IntegerField(default=0)
     tags = models.ManyToManyField(Tag)
@@ -50,7 +51,9 @@ class Answer(models.Model):
     parent = models.ForeignKey(Question, on_delete=models.CASCADE)
     title = models.CharField(max_length=256)
     text = models.TextField(max_length=2048)
-    date_time = models.DateTimeField(auto_now_add=True)
+    # date_time = models.DateTimeField(auto_now_add=True)
+    date_time = models.DateTimeField()
+    is_correct = models.BooleanField(default=False)
 
     # dp this in case someone very smart somehow break the data
     def save(self, *args, **kwargs):
