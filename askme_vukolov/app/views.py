@@ -1,37 +1,20 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.core.paginator import Paginator, PageNotAnInteger
-
-QUESTIONS_DB = [
-    {
-        'id': i,
-        'title': 'Question #' + str(i),
-        'text': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti incidunt fuga dicta eaque, quae impedit!'
-    } for i in range(50)
-]
-
-ANSWERS_DB = [
-    {
-        'title': 'Answer #' + str(i),
-        'text': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti incidunt fuga dicta eaque, quae impedit!',
-        'rate': str(i - 10),
-    } for i in range(50)
-]
-
-TAGS_DB = [
-    {
-        'name': 'tag-' + str(i),
-    } for i in range(50)
-]
+from .models import Question, Tag, Answer
+from django.shortcuts import get_object_or_404, get_list_or_404
 
 
 def get_top_tags(rows=3):
     res = []
     idx = 0
+    arr = Tag.objects.popular()
     for i in range(rows):
         res.append([])
         for _ in range(4):
-            res[i].append(TAGS_DB[idx])
+            if len(arr) <= idx:
+                break
+            res[i].append(arr[idx])
             idx += 1
     return res
 
@@ -57,26 +40,30 @@ def paginate(objects_list, request, per_page=10):
 
 
 def index(request):
-    page = paginate(QUESTIONS_DB, request, 7)
+    page = paginate(Question.objects.recent(), request, 15)
     return render(request, 'index.html', {'questions': page['obj_list'],
                                           'tags': get_top_tags(), 'is_logged_in': True,
                                           'page': page})
 
 
 def hot(request):
-    return render(request, 'index.html', {'questions': QUESTIONS_DB,
-                                          'tags': get_top_tags(), 'is_logged_in': True})
+    page = paginate(Question.objects.best(), request, 15)
+    return render(request, 'index.html', {'questions': page['obj_list'],
+                                          'tags': get_top_tags(), 'is_logged_in': True,
+                                          'page': page})
 
 
 def detail_question(request, id):
-    page = paginate(ANSWERS_DB, request, 7)
-    return render(request, 'question.html', {'question': QUESTIONS_DB[id], 'answers': page['obj_list'],
+    question = get_object_or_404(Question, pk=id)
+    page = paginate(Answer.objects.filter(parent=question), request, 7)
+    return render(request, 'question.html', {'question': question, 'answers': page['obj_list'],
                                              'tags': get_top_tags(), 'is_logged_in': True,
                                              'page': page})
 
 
 def questions_by_tag(request, slag):
-    page = paginate(QUESTIONS_DB, request, 7)
+    questions = get_list_or_404(Question.objects.by_tag(slag))
+    page = paginate(questions, request, 7)
     return render(request, 'tag.html', {'questions': page['obj_list'], 'tag_name': slag,
                                         'tags': get_top_tags(), 'is_logged_in': True,
                                         'page': page})

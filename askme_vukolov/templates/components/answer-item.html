@@ -8,17 +8,26 @@
       <h2 class="answer_title">{{ answer.title }}</h2>
       <div class="answer_text">
         <p>{{ answer.text }}</p>
+          <hr>
+        <p class="date-time">
+            <div class="fw-light fst-italic">{{ answer.date_time|date:"H:i" }}</div>
+            <div class="fw-light fst-italic">{{ answer.date_time|date:"d M Y" }}</div>
+        </p>
       </div>
     </div>
     <div class="control_panel row">
       <div class="likes col-4">
         <button type="button" class="btn btn-success">Like</button>
-        <span class="like_counter">{{ answer.rate }}</span>
+        <span class="like_counter">{{ answer.cur_rate }}</span>
         <button type="button" class="btn btn-danger">Dislike</button>
       </div>
       <div class="col-4 is_correct">
         <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            {% if answer.is_correct %}
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
+            {% else %}
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            {% endif %}
           <label class="form-check-label" for="flexCheckDefault">
             Is correct?
           </label>

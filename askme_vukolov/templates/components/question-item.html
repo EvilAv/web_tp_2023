@@ -9,20 +9,25 @@
       <div class="question_text">
         <p>{{ question.text }}</p>
       </div>
+        <p class="date-time">
+            <div class="fw-light fst-italic">{{ question.date_time|date:"H:i" }}</div>
+            <div class="fw-light fst-italic">{{ question.date_time|date:"d M Y" }}</div>
+        </p>
     </div>
     <div class="control_panel row">
       <div class="likes col-4">
         <button type="button" class="btn btn-success">Like</button>
-        <span class="like_counter">-9</span>
+        <span class="like_counter">{{ question.cur_rate }}</span>
         <button type="button" class="btn btn-danger">Dislike</button>
       </div>
       <div class="col-4 answers">
-        <a href="{% url 'detail_question' question.id %}">answer (50)</a>
+        <a href="{% url 'detail_question' question.id %}">answers ({{ question.ans_count }})</a>
       </div>
       <div class="col-4 question_tags">
         Tags:
-        <a href="{% url 'tag' 'Python' %}">Python</a>
-        <a href="{% url 'tag' 'SQL' %}">SQL</a>
+          {% for tag in question.tags.all %}
+          <a href="{% url 'tag' tag.name %}">{{ tag }}</a>
+          {% endfor %}
       </div>
     </div>
   </div>

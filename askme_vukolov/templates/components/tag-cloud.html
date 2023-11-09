@@ -3,7 +3,7 @@
             <li class="tags_group">
                 <ul>
                     {% for tag in tags_row %}
-                        <li class="tag"><a href="{% url 'tag' tag.name %}">{{ tag.name }}</a></li>
+                        <li class="tag"><a href="{% url 'tag' tag.name %}">{{ tag }}</a></li>
                     {% endfor %}
                 </ul>
             </li>
