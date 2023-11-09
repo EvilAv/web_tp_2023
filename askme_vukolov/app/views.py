@@ -2,14 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.core.paginator import Paginator, PageNotAnInteger
 from .models import Question, Tag, Answer
-
-ANSWERS_DB = [
-    {
-        'title': 'Answer #' + str(i),
-        'text': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti incidunt fuga dicta eaque, quae impedit!',
-        'rate': str(i - 10),
-    } for i in range(50)
-]
+from django.shortcuts import get_object_or_404, get_list_or_404
 
 
 def get_top_tags(rows=3):
@@ -19,6 +12,8 @@ def get_top_tags(rows=3):
     for i in range(rows):
         res.append([])
         for _ in range(4):
+            if len(arr) <= idx:
+                break
             res[i].append(arr[idx])
             idx += 1
     return res
@@ -59,14 +54,16 @@ def hot(request):
 
 
 def detail_question(request, id):
-    page = paginate(Answer.objects.filter(parent__id=id), request, 7)
-    return render(request, 'question.html', {'question': Question.objects.get(pk=id), 'answers': page['obj_list'],
+    question = get_object_or_404(Question, pk=id)
+    page = paginate(Answer.objects.filter(parent=question), request, 7)
+    return render(request, 'question.html', {'question': question, 'answers': page['obj_list'],
                                              'tags': get_top_tags(), 'is_logged_in': True,
                                              'page': page})
 
 
 def questions_by_tag(request, slag):
-    page = paginate(Question.objects.by_tag(slag), request, 15)
+    questions = get_list_or_404(Question.objects.by_tag(slag))
+    page = paginate(questions, request, 7)
     return render(request, 'tag.html', {'questions': page['obj_list'], 'tag_name': slag,
                                         'tags': get_top_tags(), 'is_logged_in': True,
                                         'page': page})
