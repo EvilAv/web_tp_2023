@@ -10,7 +10,7 @@
     <div class="name">{{ user.username }}</div>
     <div class="account_work">
         <a href="{% url 'settings' %}" class="settings">settings</a>
-        <a href="{% url 'logout' %}" class="logout">log out</a>
+        <a href="{% url 'logout' %}?continue={{ request.path }}" class="logout">log out</a>
     </div>
 </li>
 

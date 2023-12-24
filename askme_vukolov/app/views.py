@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.core.paginator import Paginator, PageNotAnInteger
 from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 
 from .forms import LoginForm
 from .models import Question, Tag, Answer
@@ -40,37 +41,37 @@ def paginate(objects_list, request, per_page=10):
         'page_obj': raw_page,
         'obj_list': raw_page.object_list,
         'page_range': correct_page_range,
-        }
+    }
 
 
+@login_required(redirect_field_name='continue', login_url='login')
 def index(request):
     page = paginate(Question.objects.recent(), request, 15)
     return render(request, 'index.html', {'questions': page['obj_list'],
-                                          'tags': get_top_tags(), 'is_logged_in': True,
-                                          'page': page})
+                                          'tags': get_top_tags(), 'page': page})
 
 
+@login_required(redirect_field_name='continue', login_url='login')
 def hot(request):
     page = paginate(Question.objects.best(), request, 15)
     return render(request, 'index.html', {'questions': page['obj_list'],
-                                          'tags': get_top_tags(), 'is_logged_in': True,
-                                          'page': page})
+                                          'tags': get_top_tags(), 'page': page})
 
 
+@login_required(redirect_field_name='continue', login_url='login')
 def detail_question(request, id):
     question = get_object_or_404(Question, pk=id)
     page = paginate(Answer.objects.filter(parent=question), request, 7)
     return render(request, 'question.html', {'question': question, 'answers': page['obj_list'],
-                                             'tags': get_top_tags(), 'is_logged_in': True,
-                                             'page': page})
+                                             'tags': get_top_tags(), 'page': page})
 
 
+@login_required(redirect_field_name='continue', login_url='login')
 def questions_by_tag(request, slag):
     questions = get_list_or_404(Question.objects.by_tag(slag))
     page = paginate(questions, request, 7)
     return render(request, 'tag.html', {'questions': page['obj_list'], 'tag_name': slag,
-                                        'tags': get_top_tags(), 'is_logged_in': True,
-                                        'page': page})
+                                        'tags': get_top_tags(), 'page': page})
 
 
 def login_view(request):
@@ -82,7 +83,10 @@ def login_view(request):
             user = authenticate(request, **login_form.cleaned_data)
             if user is not None:
                 login(request, user)
-                return redirect(reverse('index'))
+                next_page = request.GET.get('continue')
+                if next_page is None:
+                    next_page = reverse('index')
+                return redirect(next_page)
             else:
                 login_form.add_error(None, 'Sorry, wrong password')
                 login_form.add_error('password', '')
@@ -93,18 +97,21 @@ def login_view(request):
     return render(request, 'login.html', {'tags': get_top_tags(), 'form': login_form})
 
 
+@login_required(redirect_field_name='continue', login_url='login')
 def logout_view(request):
     logout(request)
-    return redirect(reverse('login'))
+    return redirect(request.GET.get('continue'))
 
 
 def signup(request):
     return render(request, 'signup.html', {'tags': get_top_tags()})
 
 
+@login_required(redirect_field_name='continue', login_url='login')
 def ask(request):
-    return render(request, 'ask.html', {'tags': get_top_tags(), 'is_logged_in': True})
+    return render(request, 'ask.html', {'tags': get_top_tags()})
 
 
+@login_required(redirect_field_name='continue', login_url='login')
 def user_settings(request):
-    return render(request, 'settings.html', {'tags': get_top_tags(), 'is_logged_in': True})
+    return render(request, 'settings.html', {'tags': get_top_tags()})
