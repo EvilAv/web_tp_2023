@@ -5,7 +5,7 @@ from django.core.paginator import Paginator, PageNotAnInteger
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
-from .forms import LoginForm
+from .forms import LoginForm, RegisterForm
 from .models import Question, Tag, Answer
 from django.shortcuts import get_object_or_404, get_list_or_404
 
@@ -104,7 +104,21 @@ def logout_view(request):
 
 
 def signup(request):
-    return render(request, 'signup.html', {'tags': get_top_tags()})
+    if request.method == 'GET':
+        signup_form = RegisterForm()
+    if request.method == 'POST':
+        signup_form = RegisterForm(request.POST)
+        if signup_form.is_valid():
+            user = signup_form.save()
+            if user:
+                login(request, user)
+                return redirect(reverse('index'))
+            else:
+                signup_form.add_error(None, 'Some complex registration problems')
+        else:
+            signup_form.add_error(None, 'Some registration problems')
+
+    return render(request, 'signup.html', {'tags': get_top_tags(), 'form': signup_form})
 
 
 @login_required(redirect_field_name='continue', login_url='login')

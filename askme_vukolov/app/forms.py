@@ -2,6 +2,8 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
 
+from app.models import Profile
+
 
 class LoginForm(forms.Form):
     username = forms.CharField()
@@ -13,3 +15,32 @@ class LoginForm(forms.Form):
             raise ValidationError("User doesn't exist")
         return data
 
+
+class RegisterForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput)
+    password_again = forms.CharField(label='Repeat password, please', widget=forms.PasswordInput)
+    nickname = forms.CharField(required=True)
+
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password']
+
+    def clean(self):
+        password1 = self.cleaned_data.get('password')
+        password2 = self.cleaned_data.get('password_again')
+
+        if password1 != password2:
+            raise ValidationError({'password': 'Passwords do not match', 'password_again': 'Passwords do not match', })
+
+        username = self.cleaned_data.get('username')
+        if User.objects.filter(username__exact=username).exists():
+            raise ValidationError({'username': 'User already exists'})
+
+    def save(self, **kwargs):
+        self.cleaned_data.pop('password_again')
+        nickname = self.cleaned_data.pop('nickname')
+        u = User.objects.create_user(**self.cleaned_data)
+        u.save()
+        p = Profile(user=u, nickname=nickname)
+        p.save()
+        return u

@@ -2,40 +2,15 @@
 
 {% load static %}
 
+{% load bootstrap5 %}
 {% block content %}
   <link rel="stylesheet" href="{% static 'css/login_style.css' %}">
           <h1 class="mt-5">Sign Up</h1>
-          <div class="error_msg">Sorry, the email adress already registred!</div>
-          <div class="row login_area login_element">
-            <label for="input_login" class="col-sm-2 col-form-label">Login</label>
-            <div class="col-7">
-              <input type="text" class="form-control" id="input_login" placeholder="Login">
-            </div>
-          </div>
-          <div class="row nick_area login_element">
-            <label for="input_nick" class="col-sm-2 col-form-label">Nickname</label>
-            <div class="col-7">
-              <input type="text" class="form-control" id="input_nick" placeholder="Nickname">
-            </div>
-          </div>
-          <div class="row pass_area login_element">
-            <label for="input_pass" class="col-sm-2 col-form-label">Password</label>
-            <div class="col-7">
-              <input type="password" class="form-control" id="input_pass" minlength="8">
-            </div>
-          </div>
-          <div class="row pass_repeat_area login_element">
-            <label for="input_pass_repeat" class="col-sm-2 col-form-label">Repeat password</label>
-            <div class="col-7">
-              <input type="password" class="form-control" id="input_pass_repeat" minlength="8">
-            </div>
-          </div>
-          <div class="row avatar_settings login_element">
-            <div class="col-sm-2">Upload yor avatar</div>
-            <div class="col-7">
-              <input class="form-control settings_element" required type="file" id="formFile" >
-            </div>
-          </div>
+        <form method="post">
+                {% csrf_token %}
+                {% bootstrap_form form %}
           <button class="btn btn-success" type="submit">Create</button>
+            </form>
+
 {% endblock %}
 
