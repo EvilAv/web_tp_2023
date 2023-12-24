@@ -1,6 +1,10 @@
-from django.shortcuts import render
+from django.contrib.auth import authenticate, login, logout
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.core.paginator import Paginator, PageNotAnInteger
+from django.urls import reverse
+
+from .forms import LoginForm
 from .models import Question, Tag, Answer
 from django.shortcuts import get_object_or_404, get_list_or_404
 
@@ -69,8 +73,29 @@ def questions_by_tag(request, slag):
                                         'page': page})
 
 
-def login(request):
-    return render(request, 'login.html', {'tags': get_top_tags()})
+def login_view(request):
+    if request.method == 'GET':
+        login_form = LoginForm()
+    if request.method == 'POST':
+        login_form = LoginForm(request.POST)
+        if login_form.is_valid():
+            user = authenticate(request, **login_form.cleaned_data)
+            if user is not None:
+                login(request, user)
+                return redirect(reverse('index'))
+            else:
+                login_form.add_error(None, 'Sorry, wrong password')
+                login_form.add_error('password', '')
+        else:
+            login_form.add_error(None, 'Some authentication problems')
+            login_form.add_error('password', '')
+
+    return render(request, 'login.html', {'tags': get_top_tags(), 'form': login_form})
+
+
+def logout_view(request):
+    logout(request)
+    return redirect(reverse('login'))
 
 
 def signup(request):
