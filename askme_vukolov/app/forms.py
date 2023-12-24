@@ -2,7 +2,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
 
-from app.models import Profile
+from app.models import Profile, Question, Tag
 
 
 class LoginForm(forms.Form):
@@ -44,3 +44,17 @@ class RegisterForm(forms.ModelForm):
         p = Profile(user=u, nickname=nickname)
         p.save()
         return u
+
+
+class QuestionFrom(forms.ModelForm):
+    title = forms.CharField(min_length=5, required=True)
+    text = forms.CharField(min_length=10, required=True, widget=forms.Textarea)
+
+    tags = forms.ModelMultipleChoiceField(
+        queryset=Tag.objects.all(),
+        widget=forms.CheckboxSelectMultiple
+    )
+
+    class Meta:
+        model = Question
+        fields = ['title', 'text', 'tags']
