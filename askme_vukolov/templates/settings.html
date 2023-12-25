@@ -1,36 +1,15 @@
 {% extends 'layouts/base.html' %}
 
 {% load static %}
+{% load bootstrap5 %}
 
 {% block content %}
   <link rel="stylesheet" href="{% static 'css/settings_style.css' %}">
-        <div class="settings_container">
-          <h1 class="mt-5">Settings: Hamprry</h1>
-          <div class="row login_settings settings_element">
-            <label for="input_login" class="col-sm-2 col-form-label">Login</label>
-            <div class="col-7">
-              <input type="text" class="form-control" id="input_login" placeholder="Login" value="Hamprry">
-            </div>
-          </div>
-          <div class="row email_settings settings_element">
-            <label for="input_email" class="col-sm-2 col-form-label">Login</label>
-            <div class="col-7">
-              <input type="text" class="form-control" id="input_email" placeholder="E-mail" value="hampry@hgwartz.uk">
-            </div>
-          </div>
-          <div class="row nickname_settings settings_element">
-            <label for="nickname_title" class="col-sm-2 col-form-label">Nickname</label>
-            <div class="col-7">
-              <input type="text" class="form-control" id="nickname_title" placeholder="Nickname" value="Hamprry">
-            </div>
-          </div>
-          <div class="row avatar_settings settings_element">
-            <div class="col-sm-2">Upload yor avatar</div>
-            <div class="col-7">
-              <img src="{% static 'img/avatar.jpg' %}" alt="UwU" class="cur_avatar">
-              <input class="form-control settings_element" required type="file" id="formFile" >
-              <input required type="submit" class="btn btn-success form_log" value="Save">
-            </div>
-          </div>
+        <div class="settings_container mt-5">
+               <form method="post">
+                    {% csrf_token %}
+                    {% bootstrap_form form %}
+                    <button type="submit" class="btn btn-success btn-answer">Save</button>
+                </form>
         </div>
 {% endblock %}

@@ -5,7 +5,7 @@ from django.core.paginator import Paginator, PageNotAnInteger
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
-from .forms import LoginForm, RegisterForm, QuestionFrom, AnswerForm
+from .forms import LoginForm, RegisterForm, QuestionFrom, AnswerForm, SettingsForm
 from .models import Question, Tag, Answer
 from django.shortcuts import get_object_or_404, get_list_or_404
 
@@ -154,4 +154,20 @@ def ask(request):
 
 @login_required(redirect_field_name='continue', login_url='login')
 def user_settings(request):
-    return render(request, 'settings.html', {'tags': get_top_tags()})
+    if request.method == 'GET':
+        settings_form = SettingsForm(instance=request.user.profile,
+                                     initial={'email': request.user.email, 'username': request.user.username})
+    if request.method == 'POST':
+        settings_form = SettingsForm(request.POST)
+        if settings_form.is_valid():
+            # remove the old one
+            request.user.profile.delete()
+            p = settings_form.save(commit=False)
+            p.user = request.user
+            p.user.email = settings_form.cleaned_data['email']
+            p.user.username = settings_form.cleaned_data['username']
+            p.user.save()
+            p.save()
+        else:
+            settings_form.add_error(None, 'Some problems with user settings')
+    return render(request, 'settings.html', {'tags': get_top_tags(), 'form': settings_form})

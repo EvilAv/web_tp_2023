@@ -56,9 +56,11 @@
             </div>
           </div>
 <script>
-    const id = {{ request.GET.add }};
-    const item = document.getElementById(id);
-    item.scrollIntoView();
+    const id = {{ request.GET.add }} + '';
+    if (id){
+        const item = document.getElementById(id);
+        item.scrollIntoView();
+    }
 </script>
 
 {% endblock %}

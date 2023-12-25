@@ -67,3 +67,13 @@ class AnswerForm(forms.ModelForm):
     class Meta:
         model = Answer
         fields = ['text']
+
+
+class SettingsForm(forms.ModelForm):
+    email = forms.CharField(widget=forms.EmailInput)
+    username = forms.CharField(required=True, min_length=5)
+    nickname = forms.CharField(min_length=5)
+
+    class Meta:
+        model = Profile
+        fields = ['nickname', 'avatar']
