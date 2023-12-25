@@ -71,6 +71,7 @@ def detail_question(request, id):
             answer = answer_form.save(commit=False)
             answer.author = request.user.profile
             answer.parent = question
+            answer.title = "Answer from " + answer.author.nickname
             answer.save()
             return redirect(request.path + '?add=' + str(answer.pk))
         else:
