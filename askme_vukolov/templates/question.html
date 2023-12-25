@@ -1,6 +1,7 @@
 {% extends 'layouts/base.html' %}
 
 {% load static %}
+{% load bootstrap5 %}
 
 {% block content %}
   <link rel="stylesheet" href="{% static 'css/question_style.css' %}">
@@ -47,9 +48,17 @@
 {% include 'components/paginator.html' %}
 
             <div class="mb-3 your_answer">
-              <textarea class="form-control" id="input_question" rows="5" placeholder="Enter your answer, if you dare..."></textarea>
+                <form method="post">
+                    {% csrf_token %}
+                    {% bootstrap_form form %}
+                    <button type="submit" class="btn btn-success btn-answer">Answer</button>
+                </form>
             </div>
           </div>
-          <button type="button" class="btn btn-success btn-answer">Answer</button>
+<script>
+    const id = {{ request.GET.add }};
+    const item = document.getElementById(id);
+    item.scrollIntoView();
+</script>
 
 {% endblock %}

@@ -2,7 +2,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
 
-from app.models import Profile, Question, Tag
+from app.models import Profile, Question, Tag, Answer
 
 
 class LoginForm(forms.Form):
@@ -58,3 +58,12 @@ class QuestionFrom(forms.ModelForm):
     class Meta:
         model = Question
         fields = ['title', 'text', 'tags']
+
+
+class AnswerForm(forms.ModelForm):
+    text = forms.CharField(min_length=10, widget=forms.Textarea(attrs={'placeholder': 'Enter your answer, if you '
+                                                                                      'dare...'}))
+
+    class Meta:
+        model = Answer
+        fields = ['text']

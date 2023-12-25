@@ -64,8 +64,8 @@ class Answer(models.Model):
     parent = models.ForeignKey(Question, on_delete=models.CASCADE)
     title = models.CharField(max_length=256)
     text = models.TextField(max_length=2048)
-    # date_time = models.DateTimeField(auto_now_add=True)
-    date_time = models.DateTimeField()
+    date_time = models.DateTimeField(auto_now_add=True)
+    # date_time = models.DateTimeField()
     is_correct = models.BooleanField(default=False)
     cur_rate = models.IntegerField(default=0)
 

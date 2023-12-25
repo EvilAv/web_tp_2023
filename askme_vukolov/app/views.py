@@ -5,7 +5,7 @@ from django.core.paginator import Paginator, PageNotAnInteger
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
-from .forms import LoginForm, RegisterForm, QuestionFrom
+from .forms import LoginForm, RegisterForm, QuestionFrom, AnswerForm
 from .models import Question, Tag, Answer
 from django.shortcuts import get_object_or_404, get_list_or_404
 
@@ -62,8 +62,21 @@ def hot(request):
 def detail_question(request, id):
     question = get_object_or_404(Question, pk=id)
     page = paginate(Answer.objects.filter(parent=question), request, 7)
+
+    if request.method == 'GET':
+        answer_form = AnswerForm()
+    if request.method == 'POST':
+        answer_form = AnswerForm(request.POST)
+        if answer_form.is_valid():
+            answer = answer_form.save(commit=False)
+            answer.author = request.user.profile
+            answer.parent = question
+            answer.save()
+            return redirect(request.path + '?add=' + str(answer.pk))
+        else:
+            answer_form.add_error(None, 'Some problems with answer')
     return render(request, 'question.html', {'question': question, 'answers': page['obj_list'],
-                                             'tags': get_top_tags(), 'page': page})
+                                             'tags': get_top_tags(), 'page': page, 'form': answer_form})
 
 
 @login_required(redirect_field_name='continue', login_url='login')
@@ -123,15 +136,12 @@ def signup(request):
 
 @login_required(redirect_field_name='continue', login_url='login')
 def ask(request):
-    print(request.user)
     if request.method == 'GET':
         question_form = QuestionFrom()
     if request.method == 'POST':
         question_form = QuestionFrom(request.POST)
         if question_form.is_valid():
             q = question_form.save(commit=False)
-            tags = question_form.cleaned_data['tags']
-            print(question_form.cleaned_data)
             q.author = request.user.profile
             q.save()
             question_form.save_m2m()
