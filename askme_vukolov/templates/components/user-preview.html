@@ -1,15 +1,16 @@
 {% load static %}
 
 
-{% if is_logged_in %}
+{% if user.is_authenticated %}
 <li class="nav-item avatar">
     <img  src="{% static 'img/avatar.jpg' %}" alt="UwU">
 </li>
 <li class="nav-item login_work">
-    <div class="name"><h4>Hamprry</h4></div>
+    <div class="name"><h4>{{ user.profile.nickname }}</h4></div>
+    <div class="name">{{ user.username }}</div>
     <div class="account_work">
         <a href="{% url 'settings' %}" class="settings">settings</a>
-        <a href="#" class="logout">log out</a>
+        <a href="{% url 'logout' %}?continue={{ request.path }}" class="logout">log out</a>
     </div>
 </li>
 

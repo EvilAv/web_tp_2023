@@ -1,29 +1,17 @@
 {% extends 'layouts/base.html' %}
 
 {% load static %}
+{% load bootstrap5 %}
 
 {% block content %}
   <link rel="stylesheet" href="{% static 'css/ask_style.css' %}">
         <div class="ask_container">
           <h1 class="mt-5">New Question</h1>
-          <div class="row ask_title input_element">
-            <label for="input_title" class="col-sm-1 col-form-label">Title</label>
-            <div class="col-11">
-              <input type="text" class="form-control" id="input_title" placeholder="Enter title">
-            </div>
-          </div>
-          <div class="row ask_text input_element">
-            <label for="input_text" class="col-sm-1 col-form-label">Text</label>
-            <div class="col-11">
-              <textarea class="form-control" id="input_text" rows="9" placeholder="Enter text"></textarea>
-            </div>
-          </div>
-          <div class="row ask_tags input_element">
-            <label for="input_tags" class="col-sm-1 col-form-label">Tags</label>
-            <div class="col-11">
-              <input type="text" class="form-control" id="input_tags" placeholder="Enter tags">
-            </div>
-          </div>
-          <button type="button" class="btn btn-warning">Ask question!</button>
+          <form method="post">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            <button type="submit" class="btn btn-warning">Ask question!</button>
+          </form>
+
         </div>
 {% endblock %}
